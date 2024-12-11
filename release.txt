@@ -1,0 +1,13 @@
+docker build -t grpc-brawl-server:latest .
+
+  
+
+docker run -d -p 50051:50051 -p 8080:8080 --name grpc-brawl-server grpc-brawl-server:latest
+
+az login
+az acr login --name brawlcr
+docker tag grpc-brawl-server:latest brawlcr.azurecr.io/grpc-brawl-server:latest
+docker tag grpc-brawl-server:latest brawlcr.azurecr.io/grpc-brawl-server:0.0.1
+
+docker push brawlcr.azurecr.io/grpc-brawl-server:latest
+docker push brawlcr.azurecr.io/grpc-brawl-server:0.0.1

@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package brawlers;
+
+option go_package = "brawl_grpc/proto;brawlers";
+
+service BrawlerService {
+  rpc GetBrawlersInfo(BrawlerRequest) returns (BrawlerResponse);
+  rpc GetBrawlerList(Empty) returns ( stream BrawlerResponse);
+  rpc AddBrawler(stream NewBrawlerRequest) returns (AddBrawlerResponse);
+  rpc GetBrawlerByTyppe( stream BrawlerTyppeRequest) returns ( stream BrawlerResponse);
+}
+
+message BrawlerRequest {
+  string Name = 1; // Cambiado a CamelCase
+}
+
+message BrawlerResponse {
+  string Name = 1; // Cambiado a CamelCase
+  string Type = 2;
+  string Category = 3; // Cambiado a CamelCase
+}
+
+message NewBrawlerRequest {
+  string Name = 1; // Cambiado a CamelCase
+  string Type = 2;
+  string Category = 3; // Cambiado a CamelCase
+}
+message AddBrawlerResponse {
+  int32 count = 1;
+}
+
+message Empty {}
+
+message BrawlerTyppeRequest {
+  string Type = 1;
+}
